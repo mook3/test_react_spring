@@ -13,15 +13,27 @@ services:
       - pgdata:/var/lib/postgresql/data
 
   app:
-    build: ./hello-spring/
+    build: hello-spring/
+    image: hello-backend
+    container_name: hello-backend
     ports:
       - "8080:8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/hello_db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
+      JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
     depends_on:
       - postgres
+
+  react:
+    build: hello-frontend/
+    image: hello-frontend
+    container_name: hello-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - app
 
 volumes:
   pgdata:

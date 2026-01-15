@@ -13,7 +13,9 @@ services:
       - pgdata:/var/lib/postgresql/data
 
   app:
-    build: ./hello-spring/
+    build: hello-spring/
+    image: hello-backend
+    container_name: hello-backend
     ports:
       - "8080:8080"
     environment:
@@ -24,7 +26,9 @@ services:
       - postgres
 
   react:
-    build: ./hello-frontend/
+    build: hello-frontend/
+    image: hello-frontend
+    container_name: hello-frontend
     ports:
       - "3000:80"
     depends_on:
