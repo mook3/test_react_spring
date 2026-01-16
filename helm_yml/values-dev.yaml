@@ -1,0 +1,5 @@
+host: hello.local
+tls:
+  enabled: false
+debug:
+  enabled: true

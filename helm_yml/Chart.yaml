@@ -1,0 +1,4 @@
+apiVersion: v2
+name: hello-spring
+description: An a/b test
+version: 1.0.0 # chart version

@@ -37,8 +37,10 @@ spec:
                 secretKeyRef:
                   name: postgres-secret
                   key: POSTGRES_PASSWORD
+            {{- if .Values.debug.enabled }}
             - name: JAVA_TOOL_OPTIONS
               value: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+            {{- end }}
 ---
 apiVersion: v1
 kind: Service

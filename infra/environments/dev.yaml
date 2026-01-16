@@ -1,0 +1,25 @@
+postgres:
+  auth:
+    username: hello
+    password: hello
+    database: hello
+
+  primary:
+    persistence:
+      enabled: true
+      size: 5Gi
+
+kafka:
+  replicaCount: 1
+
+  kraft:
+    enabled: true
+
+  auth:
+    enabled: false
+
+  persistence:
+    enabled: true
+    size: 5Gi
+
+  autoCreateTopicsEnable: true
