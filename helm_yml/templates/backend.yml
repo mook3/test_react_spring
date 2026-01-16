@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend
-  namespace: hello-spring
+  namespace: {{ .Values.namespace }}
 spec:
   selector:
     matchLabels:
@@ -19,8 +19,10 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+            {{- if .Values.debug.enabled }}
             - containerPort: 5005
               name: debug
+            {{- end }}
           readinessProbe:
             httpGet:
               path: /actuator/health
@@ -46,7 +48,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: backend
-  namespace: hello-spring
+  namespace: {{ .Values.namespace }}
 spec:
   type: ClusterIP
   ports:

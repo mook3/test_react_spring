@@ -18,6 +18,8 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+            - containerPort: 5005
+              name: debug
           readinessProbe:
             httpGet:
               path: /actuator/health
