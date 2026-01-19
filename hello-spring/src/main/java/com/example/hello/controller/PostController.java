@@ -14,18 +14,18 @@ public class PostController {
 
     private final PostRepository postRepository;
 
-    //private final KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
     public PostController(PostRepository postRepository, KafkaTemplate<String, String> kafkaTemplate) {
         this.postRepository = postRepository;
-      //  this.kafkaTemplate = kafkaTemplate;
+      this.kafkaTemplate = kafkaTemplate;
     }
 
     // CREATE
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Post createPost(@RequestBody Post post) {
-        //kafkaTemplate.send("topic1", "Saving post: " + post.getTitle());
+        kafkaTemplate.send("topic1", "Saving post: " + post.getTitle());
         return postRepository.save(post);
     }
 

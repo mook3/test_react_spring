@@ -1,0 +1,9 @@
+auth:
+  username: postgres
+  password: change-me
+  database: postgres
+
+primary:
+  persistence:
+    enabled: true
+    size: 20Gi

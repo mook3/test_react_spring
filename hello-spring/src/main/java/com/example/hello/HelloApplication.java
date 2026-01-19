@@ -22,24 +22,24 @@ public class HelloApplication {
         System.out.println("HelloApplication main!");
     }
 
-//    @Bean
-//    public NewTopic topic() {
-//        return TopicBuilder.name("topic1")
-//                //.partitions(10)
-//                .replicas(1)
-//                .build();
-//    }
-//
-//    @KafkaListener(id = "topic1_1", topics = "topic1")
-//    public void listen(String in) {
-//        System.out.println("HelloApp: " + in);
-//    }
-//
-//    @Bean
-//    public ApplicationRunner runner(KafkaTemplate<String, String> template) {
-//        return args -> {
-//            template.send("topic1", "test");
-//        };
-//    }
+    @Bean
+    public NewTopic topic() {
+        return TopicBuilder.name("topic1")
+                //.partitions(10)
+                .replicas(1)
+                .build();
+    }
+
+    @KafkaListener(id = "topic1_1", topics = "topic1")
+    public void listen(String in) {
+        System.out.println("HelloApp: " + in);
+    }
+
+    @Bean
+    public ApplicationRunner runner(KafkaTemplate<String, String> template) {
+        return args -> {
+            template.send("topic1", "test");
+        };
+    }
 }
 

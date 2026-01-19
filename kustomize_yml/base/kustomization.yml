@@ -7,8 +7,7 @@ kind: Kustomization
 namespace: hello-spring
 
 resources:
-  - ns.yml
-  - postgres.yml
+  - postgres_secret.yml
   - backend.yml
   - frontend.yml
   - ingress.yml
