@@ -1,6 +1,0 @@
-host: hello.local
-#tls:
-#  enabled: false
-debug:
-  enabled: false
-namespace: hello-spring

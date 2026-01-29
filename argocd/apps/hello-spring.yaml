@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-spring
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/mook3/test_react_spring.git
+    targetRevision: main
+    path: kustomize/app/overlays/dev
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: hello-spring-dev
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
