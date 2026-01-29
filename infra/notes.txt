@@ -1,3 +1,7 @@
 Find versions:
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm search repo bitnami/kafka --versions
+
+Find what config values can be set for helm charts:
+helm show values bitnami/postgresql
+helm show readme bitnami/postgresql

@@ -1,0 +1,35 @@
+releases:
+  - name: app
+    namespace: {{ .Values.appNamespace }}
+    createNamespace: true
+    needs:
+      - {{ .Values.infraNamespace }}/postgres
+      - kafka/kafka
+    chart: kustomize/app/overlays/{{ .Environment.Name }}
+
+releases:
+  - name: kafka
+    namespace: kafka
+    createNamespace: true
+    needs:
+      - kafka/strimzi
+    chart: kustomize/kafka/overlays/{{ .Environment.Name }}
+
+
+releases:
+  - name: postgres
+    namespace: {{ .Values.infraNamespace }}
+    chart: bitnami/postgresql
+    version: 18.2.0
+    installed: true
+    values:
+      # prevent default <release>-postgresql service name
+      - fullnameOverride: postgres
+      - {{ .Environment.Values.postgres | toYaml | nindent 8 }}
+
+releases:
+  - name: strimzi
+    namespace: kafka
+    createNamespace: true
+    chart: strimzi/strimzi-kafka-operator
+

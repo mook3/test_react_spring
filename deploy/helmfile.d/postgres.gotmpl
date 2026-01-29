@@ -1,0 +1,10 @@
+releases:
+  - name: postgres
+    namespace: {{ .Values.infraNamespace }}
+    chart: bitnami/postgresql
+    version: 18.2.0
+    installed: true
+    values:
+      # prevent default <release>-postgresql service name
+      - fullnameOverride: postgres
+      - {{ .Environment.Values.postgres | toYaml | nindent 8 }}

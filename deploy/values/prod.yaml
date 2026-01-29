@@ -1,0 +1,11 @@
+appNamespace: hello-spring
+infraNamespace: infra
+
+postgres:
+  auth:
+    postgresPassword: ${POSTGRES_PASSWORD}
+  primary:
+    persistence:
+      enabled: true
+      size: 100Gi
+

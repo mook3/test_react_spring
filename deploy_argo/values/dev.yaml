@@ -1,0 +1,14 @@
+appNamespace: hello-spring-dev
+infraNamespace: hello-spring-dev
+
+postgres:
+  auth:
+    username: postgres
+    password: postgres
+    database: postgres
+
+  primary:
+    persistence:
+      enabled: true
+      size: 5Gi
+

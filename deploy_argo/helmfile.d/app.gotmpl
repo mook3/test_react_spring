@@ -1,0 +1,8 @@
+releases:
+  - name: app
+    namespace: {{ .Values.appNamespace }}
+    createNamespace: true
+    needs:
+      - {{ .Values.infraNamespace }}/postgres
+      - kafka/kafka
+    chart: kustomize/app/overlays/{{ .Environment.Name }}
