@@ -1,0 +1,4 @@
+namespace: hello-spring-dev
+postgres_namespace: hello-spring-dev
+kafka_namespace: hello-spring-dev
+

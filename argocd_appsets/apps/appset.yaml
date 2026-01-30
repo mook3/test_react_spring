@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: my-app-envs
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"  # After Postgres (wave 0)
+spec:
+  goTemplate: true
+  
+  generators:
+    - list:
+        elements:
+          - env: dev
+            branch: develop
+            autoSync: true
+            # Postgres connection (from Bitnami chart)
+            dbHost: postgres-dev-postgresql
+          
+          - env: prod
+            branch: main
+            autoSync: false
+            # Prod has primary + replicas
+            dbHost: postgres-prod-postgresql-primary
+  
+  template:
+    metadata:
+      name: 'my-app-{{.env}}'
+    spec:
+      project: default
+      
+      source:
+        repoURL: https://github.com/your-org/your-repo
+        targetRevision: '{{.branch}}'
+        path: 'overlays/{{.env}}'
+        
+        # Pass DB host as Kustomize var
+        kustomize:
+          commonAnnotations:
+            db-host: '{{.dbHost}}'
+      
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: 'my-app-{{.env}}'
+      
+      syncPolicy:
+        {{- if .autoSync}}
+        automated:
+          prune: true
+          selfHeal: true
+        {{- end}}
+        syncOptions:
+          - CreateNamespace=true

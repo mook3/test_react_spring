@@ -14,7 +14,7 @@ spec:
     targetRevision: 18.2.0
     helm:
       valueFiles:
-        - $values/argocd_pg_values/dev.yaml
+        - $values/argocd/values/dev.yaml
   - repoURL: https://github.com/mook3/test_react_spring.git
     targetRevision: main
     ref: values
