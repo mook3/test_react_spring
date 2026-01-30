@@ -1,5 +1,0 @@
-releases:
-  - name: strimzi
-    namespace: kafka
-    createNamespace: true
-    chart: strimzi/strimzi-kafka-operator

@@ -1,8 +1,0 @@
-releases:
-  - name: kafka
-    namespace: kafka
-    createNamespace: true
-    needs:
-      - kafka/strimzi
-    chart: kustomize/kafka/overlays/{{ .Environment.Name }}
-

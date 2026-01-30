@@ -1,9 +1,0 @@
-auth:
-  username: postgres
-  password: postgres
-  database: postgres
-
-primary:
-  persistence:
-    enabled: true
-    size: 5Gi
